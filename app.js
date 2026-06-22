@@ -4,6 +4,20 @@ async function loadAssignmentsForDate(year, month, day) {
     return await response.json();
 }
 
+function saveAsPDF() {
+    const element = document.getElementById("song-list");
+
+    const options = {
+        margin: 10,
+        filename: 'song_list.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'mm', format: 'letter', orientation: 'portrait' }
+    };
+
+    html2pdf().set(options).from(element).save();
+}
+
 // Example: attach to a date picker
 document.addEventListener("DOMContentLoaded", () => {
     const dateInput = document.getElementById("date");
