@@ -37,7 +37,6 @@ self.addEventListener("activate", event => {
   self.clients.claim();
 });
 
-// Fetch: serve from cache first, then network
 self.addEventListener("fetch", event => {
   const url = new URL(event.request.url);
 
@@ -50,8 +49,9 @@ self.addEventListener("fetch", event => {
   // Cache-first for everything else
   event.respondWith(
     caches.match(event.request).then(response => {
-      return response || fetch(event.request);
+      return response || fetch(event.request));
     })
   );
 });
+
 
