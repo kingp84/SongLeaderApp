@@ -5,6 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Song Leader Menu</title>
 
+<!-- PWA: App Manifest -->
+<link rel="manifest" href="manifest.json">
+
+<!-- PWA: iPhone Home Screen Icon -->
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+
+<!-- PWA: Theme Color (status bar color) -->
+<meta name="theme-color" content="#1e1e1e">
+
 <style>
     body {
         background-color: #1e1e1e;
@@ -66,8 +75,15 @@
 </button>
 
 <div class="footer">
-    Song Leader App • Dark Mode • Android Optimized
+    Song Leader App • Dark Mode • Android & iPhone Optimized
 </div>
+
+<!-- PWA: Service Worker Registration -->
+<script>
+if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("service-worker.js");
+}
+</script>
 
 </body>
 </html>
