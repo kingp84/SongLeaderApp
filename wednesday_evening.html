@@ -159,6 +159,7 @@ function copyToClipboard() {
 
 <h1>Wednesday Evening Service</h1>
 
+<div id="song-list">
 <!-- CLASS SUBJECT -->
 <div class="section-header">CLASS SUBJECT</div>
 <div class="divider"></div>
@@ -260,7 +261,7 @@ function copyToClipboard() {
 <!-- ANNOUNCEMENTS -->
 <div class="section-header">ANNOUNCEMENTS</div>
 <div class="divider"></div>
-
+</div>
 <script>
 for (let i = 1; i <= 7; i++) {
     document.write(`
@@ -275,6 +276,7 @@ for (let i = 1; i <= 7; i++) {
 
 <!-- BUTTONS -->
 <button class="button" onclick="clearForm()">Clear Unlocked Fields</button>
+<button onclick="saveAsPDF()">Save as PDF</button>
 <button class="button" onclick="saveAsFile()">Save as HTML File</button>
 <button class="button" onclick="copyToClipboard()">Copy to Clipboard</button>
 <button class="button" onclick="location.href='index.html'">Back to Menu</button>
