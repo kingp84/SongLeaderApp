@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sunday AM Service</title>
+<title>Sunday Morning Service</title>
 
 <style>
     body {
@@ -126,7 +126,7 @@ function saveAsFile() {
 
     const a = document.createElement("a");
     a.href = url;
-    a.download = "Sunday_AM_Service.html";
+    a.download = "Sunday_Morning_Service.html";
     a.click();
 
     URL.revokeObjectURL(url);
@@ -134,7 +134,7 @@ function saveAsFile() {
 
 // Copy all fields to clipboard
 function copyToClipboard() {
-    let text = "Sunday AM Service\n\n";
+    let text = "Sunday Morning Service\n\n";
     document.querySelectorAll(".row").forEach(row => {
         const label = row.querySelector(".label")?.innerText || "";
         const field = row.querySelector("input")?.value || "";
@@ -149,7 +149,7 @@ function copyToClipboard() {
 </head>
 <body>
 
-<h1>Sunday AM Service</h1>
+<h1>Sunday Morning Service</h1>
 
 <!-- SONG 1 -->
 <div class="section-header">SONG 1</div>
