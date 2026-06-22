@@ -1,1 +1,22 @@
-
+{
+  "name": "Song Leader",
+  "short_name": "SongLeader",
+  "start_url": "index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#1e1e1e",
+  "theme_color": "#1e1e1e",
+  "description": "A simple offline-ready song leader app for worship services.",
+  "icons": [
+    {
+      "src": "icons/ic_launcher.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/ic_launcher.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
