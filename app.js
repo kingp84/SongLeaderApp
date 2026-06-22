@@ -51,12 +51,32 @@ document.addEventListener("DOMContentLoaded", () => {
             );
 
             displayAssignments(data.assignments);
+            fillAssignmentFields(data.assignments);
         });
     }
 });
 
 function displayAssignments(assignments) {
-    const container = document.getElementById("assignments");
+    function fillAssignmentFields(assignments) {
+    const roleMap = {
+        "Opening Prayer": "openingprayer",
+        "Closing Prayer": "closingprayer",
+        "Scripture Reading": "scripturereader",
+        "Preaching": "preaching",
+        "Invitation": "invitation",
+        "Bible Class": "classteacher"
+    };
+
+    assignments.forEach(a => {
+        const fieldId = roleMap[a.role];
+        if (fieldId) {
+            const field = document.getElementById(fieldId);
+            if (field) {
+                field.value = a.person || "";
+            }
+        }
+    });
+}
     container.innerHTML = "";
 
     assignments.forEach(a => {
