@@ -61,7 +61,7 @@ function displayAssignments(assignments) {
     const roleMap = {
         "Opening Prayer": "openingprayer",
         "Closing Prayer": "closingprayer",
-        "Scripture Reading": "scripturereader",
+        "Scripture Reading": "scriptures",
         "Preaching": "preaching",
         "Invitation": "invitation",
         "Bible Class": "classteacher"
