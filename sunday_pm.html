@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sunday PM Service</title>
+
+<style>
+    body {
+        background-color: #1e1e1e;
+        color: white;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 25px;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .section-header {
+        font-size: 18px;
+        font-weight: bold;
+        margin-top: 25px;
+        margin-bottom: 5px;
+    }
+
+    .divider {
+        border-bottom: 1px solid #3a3a3a;
+        margin-bottom: 15px;
+    }
+
+    .row {
+        display: flex;
+        align-items: center;
+        margin-bottom: 12px;
+    }
+
+    .label {
+        width: 160px;
+        font-size: 16px;
+    }
+
+    input[type="text"] {
+        flex: 1;
+        padding: 8px;
+        background-color: #2a2a2a;
+        border: 1px solid #3a3a3a;
+        color: white;
+        border-radius: 0;
+        font-size: 16px;
+    }
+
+    .lock-box {
+        margin-left: 10px;
+        transform: scale(1.2);
+    }
+
+    .button {
+        width: 100%;
+        background-color: #2ecc71;
+        color: #1e1e1e;
+        padding: 14px;
+        margin-top: 20px;
+        font-size: 18px;
+        font-weight: bold;
+        border: none;
+        border-radius: 0;
+        cursor: pointer;
+    }
+
+    .button:active {
+        background-color: #29b765;
+    }
+</style>
+
+<script>
+// Load saved locked fields
+window.onload = function () {
+    document.querySelectorAll("input[type='text']").forEach(field => {
+        const key = "pm_" + field.id;
+        const saved = localStorage.getItem(key);
+        if (saved !== null) field.value = saved;
+    });
+
+    document.querySelectorAll(".lock-box").forEach(box => {
+        const key = "pm_lock_" + box.dataset.target;
+        const saved = localStorage.getItem(key);
+        if (saved === "true") box.checked = true;
+    });
+};
+
+// Save locked fields automatically
+function saveLocked() {
+    document.querySelectorAll(".lock-box").forEach(box => {
+        const key = "pm_lock_" + box.dataset.target;
+        localStorage.setItem(key, box.checked);
+
+        const field = document.getElementById(box.dataset.target);
+        const fieldKey = "pm_" + field.id;
+
+        if (box.checked) {
+            localStorage.setItem(fieldKey, field.value);
+        } else {
+            localStorage.removeItem(fieldKey);
+        }
+    });
+}
+
+// Clear only unlocked fields
+function clearForm() {
+    document.querySelectorAll("input[type='text']").forEach(field => {
+        const lockBox = document.querySelector(".lock-box[data-target='" + field.id + "']");
+        if (!lockBox.checked) field.value = "";
+    });
+}
+
+// Save as HTML file
+function saveAsFile() {
+    const content = document.documentElement.outerHTML;
+    const blob = new Blob([content], { type: "text/html" });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "Sunday_PM_Service.html";
+    a.click();
+
+    URL.revokeObjectURL(url);
+}
+
+// Copy all fields to clipboard
+function copyToClipboard() {
+    let text = "Sunday PM Service\n\n";
+    document.querySelectorAll(".row").forEach(row => {
+        const label = row.querySelector(".label")?.innerText || "";
+        const field = row.querySelector("input")?.value || "";
+        if (label.trim() !== "") text += label + " " + field + "\n";
+    });
+
+    navigator.clipboard.writeText(text);
+    alert("Copied to clipboard!");
+}
+</script>
+
+</head>
+<body>
+
+<h1>Sunday PM Service</h1>
+
+<!-- SONG 1 -->
+<div class="section-header">SONG 1</div>
+<div class="divider"></div>
+
+<div class="row">
+    <div class="label">Song #:</div>
+    <input id="song1num" type="text" oninput="saveLocked()">
+    <input type="checkbox" class="lock-box" data-target="song1num" onchange="saveLocked()">
+</div>
+
+<div class="row">
+    <div class="label">Title:</div>
+    <input id="song1title" type="text" oninput="saveLocked()">
+    <input type="checkbox" class="lock-box" data-target="song1title" onchange="saveLocked()">
+</div>
+
+<!-- SONG 2 -->
+<div class="section-header">SONG 2</div>
+<div class="divider"></div>
+
+<div class="row">
+    <div class="label">Song #:</div>
+    <input id="song2num" type="text" oninput="saveLocked()">
+    <input type="checkbox" class="lock-box" data-target="song2num" onchange="saveLocked()">
+</div>
+
+<div class="row">
+    <div class="label">Title:</div>
+    <input id="song2title" type="text" oninput="saveLocked()">
+    <input type="checkbox" class="lock-box" data-target="song2title" onchange="saveLocked()">
+</div>
+
+<!-- OPENING PRAYER -->
+<div class="section-header">OPENING PRAYER</div>
+<div class="divider"></div>
+
+<div class="row">
+    <div class="label">Prayer:</div>
+    <input id="openingprayer" type="text" oninput="saveLocked()">
+    <input type="checkbox" class="lock-box" data-target="openingprayer" onchange="saveLocked()">
+</div>
+
+<!-- SONG 3 -->
+<div class="section-header">SONG 3</div>
+<div class="divider"></div>
+
+<div class="row">
+    <div class="label">Song #:</div>
+    <input id="song3num" type="text" oninput="saveLocked()">
+    <input type="checkbox" class="lock-box" data-target="song3num" onchange="saveLocked()">
+</div>
+
+<div class="row">
+    <div class="label">Title:</div>
+    <input id="song3title" type="text" oninput="saveLocked()">
+    <input type="checkbox" class="lock-box" data-target="song3title" onchange="saveLocked()">
+</div>
+
+<div class="divider"></div>
+<!-- INVITATION NUMBER -->
+<div class="section-header">GIVE INVITATION NUMBER</div>
+<div class="divider"></div>
+
+<!-- SONG 4 -->
+<div class="section-header">SONG 4</div>
+<div class="divider"></div>
+
+<div class="row">
+    <div class="label">Song #:</div>
+    <input id="song1num" type="text" oninput="saveLocked()">
+    <input type="checkbox" class="lock-box" data-target="song1num" onchange="saveLocked()">
+</div>
+
+<div class="row">
+    <div class="label">Title:</div>
+    <input id="song1title" type="text" oninput="saveLocked()">
+    <input type="checkbox" class="lock-box" data-target="song1title" onchange="saveLocked()">
+</div>
+
+<div class="divider"></div>
+<!-- SCRIPTURE READER -->
+<div class="section-header">SCRIPTURE READER</div>
+<div class="divider"></div>
+
+<div class="row">
+    <div class="label">Reader:</div>
+    <input id="scripturereader" type="text" oninput="saveLocked()">
+    <input type="checkbox" class="lock-box" data-target="scripturereader" onchange="saveLocked()">
+</div>
+
+<!-- PREACHING -->
+<div class="section-header">PREACHING</div>
+<div class="divider"></div>
+
+<div class="row">
+    <div class="label">Speaker:</div>
+    <input id="preaching" type="text" oninput="saveLocked()">
+    <input type="checkbox" class="lock-box" data-target="preaching" onchange="saveLocked()">
+</div>
+
+<!-- INVITATION SONG -->
+<div class="section-header">INVITATION SONG</div>
+<div class="divider"></div>
+
+<div class="row">
+    <div class="label">Song #:</div>
+    <input id="invtitle" type="text" oninput="saveLocked()">
+    <input type="checkbox" class="lock-box" data-target="invtitle" onchange="saveLocked()">
+</div>
+
+<div class="row">
+    <div class="label">Title:</div>
+    <input id="song1title" type="text" oninput="saveLocked()">
+    <input type="checkbox" class="lock-box" data-target="song1title" onchange="saveLocked()">
+</div>
+
+<div class="divider"></div>
+<!-- LORD'S SUPPER -->
+<div class="section-header">---LORD'S SUPPER---</div>
+<div class="divider"></div>
+
+<div class="row">
+    <div class="label">LS Song #:</div>
+    <input id="lssong" type="text" oninput="saveLocked()">
+    <input type="checkbox" class="lock-box" data-target="lssong" onchange="saveLocked()">
+</div>
+
+<div class="row">
+    <div class="label">Title:</div>
+    <input id="song1title" type="text" oninput="saveLocked()">
+    <input type="checkbox" class="lock-box" data-target="song1title" onchange="saveLocked()">
+</div>
+
+<!-- CLOSING SONG -->
+<div class="section-header">CLOSING SONG</div>
+<div class="divider"></div>
+
+<div class="row">
+    <div class="label">Song #:</div>
+    <input id="closingnum" type="text" oninput="saveLocked()">
+    <input type="checkbox" class="lock-box" data-target="closingnum" onchange="saveLocked()">
+</div>
+
+<div class="row">
+    <div class="label">Title:</div>
+    <input id="closingtitle" type="text" oninput="saveLocked()">
+    <input type="checkbox" class="lock-box" data-target="closingtitle" onchange="saveLocked()">
+</div>
+
+<!-- CLOSING PRAYER -->
+<div class="section-header">CLOSING PRAYER</div>
+<div class="divider"></div>
+
+<div class="row">
+    <div class="label">Prayer:</div>
+    <input id="closingprayer" type="text" oninput="saveLocked()">
+    <input type="checkbox" class="lock-box" data-target="closingprayer" onchange="saveLocked()">
+</div>
+
+<!-- ANNOUNCEMENTS -->
+<div class="section-header">ANNOUNCEMENTS</div>
+<div class="divider"></div>
+
+<script>
+for (let i = 1; i <= 7; i++) {
+    document.write(`
+        <div class="row">
+            <div class="label">${i}.</div>
+            <input id="ann${i}" type="text" oninput="saveLocked()">
+            <input type="checkbox" class="lock-box" data-target="ann${i}" onchange="saveLocked()">
+        </div>
+    `);
+}
+</script>
+
+<!-- BUTTONS -->
+<button class="button" onclick="clearForm()">Clear Unlocked Fields</button>
+<button class="button" onclick="saveAsFile()">Save as HTML File</button>
+<button class="button" onclick="copyToClipboard()">Copy to Clipboard</button>
+<button class="button" onclick="location.href='index.html'">Back to Menu</button>
+
+</body>
+</html>
