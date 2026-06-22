@@ -3,12 +3,12 @@ const CACHE_NAME = "songleader-cache-v1";
 const FILES_TO_CACHE = [
   "/",
   "/index.html",
-  "/sunday_am.html",
-  "/sunday_pm.html",
-  "/wednesday.html",
+  "/sunday_mornign.html",
+  "/sunday_evening.html",
+  "/wednesday_evening.html",
   "/manifest.json",
-  "/icons/icon-192.png",
-  "/icons/icon-512.png"
+  "/icons/ic_launcher.png",
+  "/icons/ic_launcher.png"
 ];
 
 // Install: cache everything
