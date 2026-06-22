@@ -1,7 +1,26 @@
 async function loadAssignmentsForDate(year, month, day) {
     const url = `https://pioneer-and-bell-speaktruth.onrender.com/assignments/api/${year}/${month}/${day}/`;
-    const response = await fetch(url);
-    return await response.json();
+
+    console.log("Fetching:", url);
+
+    try {
+        const response = await fetch(url);
+
+        console.log("Status:", response.status);
+
+        if (!response.ok) {
+            console.error("Fetch failed:", response.statusText);
+            return { assignments: [] };
+        }
+
+        const data = await response.json();
+        console.log("Data received:", data);
+        return data;
+
+    } catch (err) {
+        console.error("Network error:", err);
+        return { assignments: [] };
+    }
 }
 
 function saveAsPDF() {
