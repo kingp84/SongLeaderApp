@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wednesday Service</title>
+<title>Wednesday Evening Service</title>
 
 <style>
     body {
@@ -126,7 +126,7 @@ function saveAsFile() {
 
     const a = document.createElement("a");
     a.href = url;
-    a.download = "Wednesday_Service.html";
+    a.download = "Wednesday_Evening_Service.html";
     a.click();
 
     URL.revokeObjectURL(url);
@@ -134,7 +134,7 @@ function saveAsFile() {
 
 // Copy all fields to clipboard
 function copyToClipboard() {
-    let text = "Wednesday Service\n\n";
+    let text = "Wednesday Evening Service\n\n";
     document.querySelectorAll(".row").forEach(row => {
         const label = row.querySelector(".label")?.innerText || "";
         const field = row.querySelector("input")?.value || "";
@@ -149,7 +149,7 @@ function copyToClipboard() {
 </head>
 <body>
 
-<h1>Wednesday Service</h1>
+<h1>Wednesday Evening Service</h1>
 
 <!-- CLASS SUBJECT -->
 <div class="section-header">CLASS SUBJECT</div>
@@ -213,8 +213,8 @@ function copyToClipboard() {
     <input type="checkbox" class="lock-box" data-target="devotitle" onchange="saveLocked()">
 </div>
 
-<!-- DEVOTIONAL/INVITATION -->
-<div class="section-header">DEVOTIONAL/INVITATION</div>
+<!-- INVITATION -->
+<div class="section-header">INVITATION</div>
 <div class="divider"></div>
 
 <div class="row">
