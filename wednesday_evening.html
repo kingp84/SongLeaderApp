@@ -185,15 +185,19 @@ function copyToClipboard() {
 <div class="section-header">ASSEMBLY</div>
 <div class="divider"></div>
 
+<!-- Opening SONG -->
+<div class="section-header">Opening SONG</div>
+<div class="divider"></div>
+
 <div class="row">
     <div class="label">Song #:</div>
-    <input id="assemblynum" type="text" oninput="saveLocked()">
+    <input id="openingnum" type="text" oninput="saveLocked()">
     <input type="checkbox" class="lock-box" data-target="assemblynum" onchange="saveLocked()">
 </div>
 
 <div class="row">
     <div class="label">Title:</div>
-    <input id="assemblytitle" type="text" oninput="saveLocked()">
+    <input id="openingtitle" type="text" oninput="saveLocked()">
     <input type="checkbox" class="lock-box" data-target="assemblytitle" onchange="saveLocked()">
 </div>
 
@@ -248,6 +252,22 @@ function copyToClipboard() {
     <input type="checkbox" class="lock-box" data-target="invtitle" onchange="saveLocked()">
 </div>
 
+<!-- Closing Song-->
+<div class="section-header">Closing SONG</div>
+<div class="divider"></div>
+
+<div class="row">
+    <div class="label">Song #:</div>
+    <input id="closingnum" type="text" oninput="saveLocked()">
+    <input type="checkbox" class="lock-box" data-target="invnum" onchange="saveLocked()">
+</div>
+
+<div class="row">
+    <div class="label">Title:</div>
+    <input id="closingtitle" type="text" oninput="saveLocked()">
+    <input type="checkbox" class="lock-box" data-target="invtitle" onchange="saveLocked()">
+</div>
+    
 <!-- CLOSING PRAYER -->
 <div class="section-header">CLOSING PRAYER</div>
 <div class="divider"></div>
