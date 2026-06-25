@@ -2,7 +2,7 @@
 // 1. Load Assignments from API
 // ===============================
 async function loadAssignmentsForDate(year, month, day) {
-    const url = `https://pioneer-and-bell-speaktruth.onrender.com/assignments/api/${year}/${month}/${day}/`;
+    const url = `https://speaktruth.onrender.com/assignments/api/${year}/${month}/${day}/`;
 
     console.log("Fetching:", url);
 
