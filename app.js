@@ -55,17 +55,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (dateInput) {
         dateInput.addEventListener("change", async () => {
-            const dt = new Date(dateInput.value);
+            try {
+                const dt = new Date(dateInput.value);
 
-            const data = await loadAssignmentsForDate(
-                dt.getFullYear(),
-                dt.getMonth() + 1,
-                dt.getDate()
-            );
+                const data = await loadAssignmentsForDate(
+                    dt.getFullYear(),
+                    dt.getMonth() + 1,
+                    dt.getDate()
+                );
 
-            displayAssignments(data);
-            fillAssignmentFields(data.assignments);
+                console.log("Assignments for date:", data);
+
+                displayAssignments(data);
+                fillAssignmentFields(data.assignments || {});
+            } catch (err) {
+                console.error("Error during assignment load/display:", err);
+            }
         });
+    } else {
+        console.warn("No #date input found in DOM.");
     }
 });
 
@@ -74,15 +82,26 @@ document.addEventListener("DOMContentLoaded", () => {
 // ===============================
 function displayAssignments(data) {
     const container = document.getElementById("assignments");
+    if (!container) {
+        console.warn("No #assignments container found in DOM.");
+        return;
+    }
+
     container.innerHTML = "";
 
-    const assignments = data.assignments;
+    const assignments = data && data.assignments ? data.assignments : {};
 
+    // Show each assignment key/value
     for (const roleKey in assignments) {
+        if (!Object.prototype.hasOwnProperty.call(assignments, roleKey)) continue;
+
         const div = document.createElement("div");
         div.className = "assignment-item";
 
-        const roleName = roleKey.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+        const roleName = roleKey
+            .replace(/_/g, " ")
+            .replace(/\b\w/g, c => c.toUpperCase());
+
         const person = assignments[roleKey] || "Unassigned";
 
         div.textContent = `${roleName}: ${person}`;
@@ -90,7 +109,7 @@ function displayAssignments(data) {
     }
 
     // Display notes if present
-    if (data.notes && data.notes.length > 0) {
+    if (Array.isArray(data.notes) && data.notes.length > 0) {
         const notesDiv = document.createElement("div");
         notesDiv.className = "assignment-notes";
         notesDiv.textContent = "Notes: " + data.notes.join(" | ");
