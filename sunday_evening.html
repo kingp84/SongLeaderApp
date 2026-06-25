@@ -348,6 +348,13 @@ function fillAssignmentFields(a) {
     safeFill("preaching", a.preaching);
     safeFill("invitation", a.invitation);
     safeFill("classteacher", a.classteacher);
+    const noteBox = document.getElementById("service-note");
+
+    if (a.notes && a.notes.length > 0) {
+        noteBox.textContent = a.notes.join(" | ");
+    } else {
+        noteBox.textContent = "";
+    }
 }
 </script>
 
