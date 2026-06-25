@@ -1,16 +1,23 @@
+// ===============================
+// 1. Load Assignments from API
+// ===============================
 async function loadAssignmentsForDate(year, month, day) {
     const url = `https://pioneer-and-bell-speaktruth.onrender.com/assignments/api/${year}/${month}/${day}/`;
 
     console.log("Fetching:", url);
 
     try {
-        const response = await fetch(url);
+        const response = await fetch(url, {
+            headers: {
+                "X-API-Key": "YOUR_SECRET_KEY_HERE"
+            }
+        });
 
         console.log("Status:", response.status);
 
         if (!response.ok) {
             console.error("Fetch failed:", response.statusText);
-            return { assignments: [] };
+            return { assignments: {}, notes: [] };
         }
 
         const data = await response.json();
@@ -19,10 +26,13 @@ async function loadAssignmentsForDate(year, month, day) {
 
     } catch (err) {
         console.error("Network error:", err);
-        return { assignments: [] };
+        return { assignments: {}, notes: [] };
     }
 }
 
+// ===============================
+// 2. Save as PDF
+// ===============================
 function saveAsPDF() {
     const element = document.getElementById("song-list");
 
@@ -37,52 +47,71 @@ function saveAsPDF() {
     html2pdf().set(options).from(element).save();
 }
 
-// Example: attach to a date picker
+// ===============================
+// 3. Date Picker Listener
+// ===============================
 document.addEventListener("DOMContentLoaded", () => {
     const dateInput = document.getElementById("date");
 
     if (dateInput) {
         dateInput.addEventListener("change", async () => {
             const dt = new Date(dateInput.value);
+
             const data = await loadAssignmentsForDate(
                 dt.getFullYear(),
                 dt.getMonth() + 1,
                 dt.getDate()
             );
 
-            displayAssignments(data.assignments);
+            displayAssignments(data);
             fillAssignmentFields(data.assignments);
         });
     }
 });
 
-function displayAssignments(assignments) {
-    function fillAssignmentFields(assignments) {
-    const roleMap = {
-        "Opening Prayer": "openingprayer",
-        "Closing Prayer": "closingprayer",
-        "Scripture Reading": "scriptures",
-        "Preaching": "preaching",
-        "Invitation": "invitation",
-        "Bible Class": "classteacher"
-    };
-
-    assignments.forEach(a => {
-        const fieldId = roleMap[a.role];
-        if (fieldId) {
-            const field = document.getElementById(fieldId);
-            if (field) {
-                field.value = a.person || "";
-            }
-        }
-    });
-}
+// ===============================
+// 4. Display Assignments (visual list)
+// ===============================
+function displayAssignments(data) {
+    const container = document.getElementById("assignments");
     container.innerHTML = "";
 
-    assignments.forEach(a => {
+    const assignments = data.assignments;
+
+    for (const roleKey in assignments) {
         const div = document.createElement("div");
         div.className = "assignment-item";
-        div.textContent = `${a.role}: ${a.person || "Unassigned"}`;
+
+        const roleName = roleKey.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+        const person = assignments[roleKey] || "Unassigned";
+
+        div.textContent = `${roleName}: ${person}`;
         container.appendChild(div);
-    });
+    }
+
+    // Display notes if you want
+    if (data.notes && data.notes.length > 0) {
+        const notesDiv = document.createElement("div");
+        notesDiv.className = "assignment-notes";
+        notesDiv.textContent = "Notes: " + data.notes.join(" | ");
+        container.appendChild(notesDiv);
+    }
+}
+
+// ===============================
+// 5. Autofill Form Fields
+// ===============================
+function fillAssignmentFields(a) {
+    document.getElementById("openingprayer").value = a.opening_prayer || "";
+    document.getElementById("closingprayer").value = a.closing_prayer || "";
+    document.getElementById("scriptures").value = a.scripture_reading || "";
+    document.getElementById("preaching").value = a.preaching || "";
+    document.getElementById("invitation").value = a.invitation || "";
+    document.getElementById("classteacher").value = a.bible_class || "";
+
+    // Optional notes box
+    const notesBox = document.getElementById("notes");
+    if (notesBox && a.notes) {
+        notesBox.value = a.notes.join("\n");
+    }
 }
