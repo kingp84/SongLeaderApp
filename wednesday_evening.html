@@ -306,7 +306,16 @@ for (let i = 1; i <= 7; i++) {
             safeFill("preaching", a.preaching);
             safeFill("invitation", a.invitation);
             safeFill("classteacher", a.bible_class);
-        
+
+            // ⭐ Special logic for Class Teacher (Wednesday)
+            if (a.notes && a.notes.length > 0) {
+                // If it's Singing Night or 5th Sunday, show the note
+                safeFill("classteacher", a.notes.join(" | "));
+            } else {
+                // Otherwise show the actual teacher
+                safeFill("classteacher", a.classteacher);
+            }
+        }
             const notesBox = document.getElementById("notes");
             if (notesBox && a.notes) {
                 notesBox.value = a.notes.join("\n");
