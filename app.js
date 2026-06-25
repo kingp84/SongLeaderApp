@@ -135,7 +135,7 @@ function fillAssignmentFields(a) {
     safeFill("closingprayer", a.closing_prayer);
 
     // Sunday Morning + Sunday Evening only
-    safeFill("scriptures", a.scripture_reading);
+    safeFill("scriptures", a.scriptures);
     safeFill("preaching", a.preaching);
 
     // Wednesday Evening only
