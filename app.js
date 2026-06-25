@@ -102,14 +102,27 @@ function displayAssignments(data) {
 // 5. Autofill Form Fields
 // ===============================
 function fillAssignmentFields(a) {
-    document.getElementById("openingprayer").value = a.opening_prayer || "";
-    document.getElementById("closingprayer").value = a.closing_prayer || "";
-    document.getElementById("scriptures").value = a.scripture_reading || "";
-    document.getElementById("preaching").value = a.preaching || "";
-    document.getElementById("invitation").value = a.invitation || "";
-    document.getElementById("classteacher").value = a.bible_class || "";
+    // Helper: safely fill a field if it exists
+    function safeFill(id, value) {
+        const el = document.getElementById(id);
+        if (el) {
+            el.value = value || "";
+        }
+    }
 
-    // Optional notes box
+    // Roles that appear on ALL services
+    safeFill("openingprayer", a.opening_prayer);
+    safeFill("closingprayer", a.closing_prayer);
+
+    // Sunday Morning + Sunday Evening only
+    safeFill("scriptures", a.scripture_reading);
+    safeFill("preaching", a.preaching);
+
+    // Wednesday Evening only
+    safeFill("invitation", a.invitation);
+    safeFill("classteacher", a.bible_class);
+
+    // Notes (optional)
     const notesBox = document.getElementById("notes");
     if (notesBox && a.notes) {
         notesBox.value = a.notes.join("\n");
