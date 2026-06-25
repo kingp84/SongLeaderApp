@@ -37,6 +37,7 @@ self.addEventListener("activate", event => {
   self.clients.claim();
 });
 
+// Fetch handler
 self.addEventListener("fetch", event => {
   const url = new URL(event.request.url);
 
@@ -53,5 +54,3 @@ self.addEventListener("fetch", event => {
     })
   );
 });
-
-
