@@ -333,26 +333,26 @@ for (let i = 1; i <= 7; i++) {
         </div>
     `);
 }
-function fillAssignmentFields(a) {
-    function safeFill(id, value) {
-        const el = document.getElementById(id);
-        if (el) {
-            el.value = value || "";
+        function fillAssignmentFields(a) {
+            function safeFill(id, value) {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.value = value || "";
+                }
+            }
+        
+            safeFill("openingprayer", a.opening_prayer);
+            safeFill("closingprayer", a.closing_prayer);
+            safeFill("scriptures", a.scripture_reading);
+            safeFill("preaching", a.preaching);
+            safeFill("invitation", a.invitation);
+            safeFill("classteacher", a.bible_class);
+        
+            const notesBox = document.getElementById("notes");
+            if (notesBox && a.notes) {
+                notesBox.value = a.notes.join("\n");
+            }
         }
-    }
-
-    safeFill("openingprayer", a.opening_prayer);
-    safeFill("closingprayer", a.closing_prayer);
-    safeFill("scriptures", a.scripture_reading);
-    safeFill("preaching", a.preaching);
-    safeFill("invitation", a.invitation);
-    safeFill("classteacher", a.bible_class);
-
-    const notesBox = document.getElementById("notes");
-    if (notesBox && a.notes) {
-        notesBox.value = a.notes.join("\n");
-    }
-}
     });
 }
 </script>
