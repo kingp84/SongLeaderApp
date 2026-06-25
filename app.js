@@ -8,9 +8,7 @@ async function loadAssignmentsForDate(year, month, day) {
 
     try {
         const response = await fetch(url, {
-            headers: {
-                "X-API-Key": "c4f9e8b2d7a14f0c9e3b5d2a8f6c1e4b7d9a2c3f5e8b1d4c6f0a2e9b7c3d1f5"
-            }
+            headers: {}
         });
 
         console.log("Status:", response.status);
