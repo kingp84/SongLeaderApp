@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (dateInput) {
         dateInput.addEventListener("change", async () => {
             try {
-                const dt = new Date(dateInput.value);
+                const [year, month, day] = dateInput.value.split("-").map(Number);;
 
                 const data = await loadAssignmentsForDate(
                     dt.getFullYear(),
