@@ -23,6 +23,15 @@
         font-weight: bold;
     }
 
+    .service-note {
+        text-align: center;
+        font-size: 18px;
+        margin-top: -10px;
+        margin-bottom: 20px;
+        color: #ffd27f;
+        font-weight: bold;
+    }
+
     .section-header {
         font-size: 18px;
         font-weight: bold;
@@ -156,6 +165,20 @@ function copyToClipboard() {
 <div id="assignments"></div>
 
 <script src="app.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const dateInput = document.getElementById("date");
+
+    dateInput.addEventListener("change", async () => {
+        const [year, month, day] = dateInput.value.split("-").map(Number);
+
+        const data = await loadAssignmentsForDate(year, month, day);
+
+        displayAssignments(data);     // shows list
+        fillAssignmentFields(data);   // fills the boxes
+    });
+});
+</script>
 
 <h1>SUNDAY EVENING</h1>
 <div id="service-note" class="service-note"></div>
@@ -334,7 +357,7 @@ for (let i = 1; i <= 7; i++) {
         </div>
     `);
 }
-function fillAssignmentFields(a) {
+function fillAssignmentFields(data) {
     function safeFill(id, value) {
         const el = document.getElementById(id);
         if (el) {
