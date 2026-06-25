@@ -9,7 +9,7 @@ async function loadAssignmentsForDate(year, month, day) {
     try {
         const response = await fetch(url, {
             headers: {
-                "X-API-Key": "YOUR_SECRET_KEY_HERE"
+                "X-API-Key": "c4f9e8b2d7a14f0c9e3b5d2a8f6c1e4b7d9a2c3f5e8b1d4c6f0a2e9b7c3d1f5"
             }
         });
 
@@ -89,7 +89,7 @@ function displayAssignments(data) {
         container.appendChild(div);
     }
 
-    // Display notes if you want
+    // Display notes if present
     if (data.notes && data.notes.length > 0) {
         const notesDiv = document.createElement("div");
         notesDiv.className = "assignment-notes";
