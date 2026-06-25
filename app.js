@@ -55,20 +55,20 @@ document.addEventListener("DOMContentLoaded", () => {
     const dateInput = document.getElementById("date");
 
     if (dateInput) {
-        dateInput.addEventListener("change", async () => {
+        dateInput.addEventListener("change", async function () {
             try {
-                const [year, month, day] = dateInput.value.split("-").map(Number);;
-
-                const data = await loadAssignmentsForDate(
-                    dt.getFullYear(),
-                    dt.getMonth() + 1,
-                    dt.getDate()
-                );
-
-                console.log("Assignments for date:", data);
-
-                displayAssignments(data);
-                fillAssignmentFields(data.assignments || {});
+                const [year, month, day] = dateInput.value.split("-").map(Number);
+        
+                const url = `https://speaktruth.onrender.com/assignments/api/${year}/${month}/${day}/`;
+        
+                console.log("Fetching:", url);
+        
+                const response = await fetch(url);
+                const data = await response.json();
+        
+                displayAssignments(data.assignments);
+                fillAssignmentFields(data.assignments);
+        
             } catch (err) {
                 console.error("Error during assignment load/display:", err);
             }
