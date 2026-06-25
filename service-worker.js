@@ -49,7 +49,7 @@ self.addEventListener("fetch", event => {
   // Cache-first for everything else
   event.respondWith(
     caches.match(event.request).then(response => {
-      return response || fetch(event.request));
+      return response || fetch(event.request);
     })
   );
 });
