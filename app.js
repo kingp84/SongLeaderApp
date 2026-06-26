@@ -95,11 +95,4 @@ function displayAssignments(data) {
         div.textContent = `${roleName}: ${person}`;
         container.appendChild(div);
     }
-
-    if (Array.isArray(data.notes) && data.notes.length > 0) {
-        const notesDiv = document.createElement("div");
-        notesDiv.className = "assignment-notes";
-        notesDiv.textContent = "Notes: " + data.notes.join(" | ");
-        container.appendChild(notesDiv);
-    }
 }
