@@ -162,20 +162,6 @@ function copyToClipboard() {
 <input type="date" id="date">
 
 <script src="app.js"></script>
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-    const dateInput = document.getElementById("date");
-
-    dateInput.addEventListener("change", async () => {
-        const [year, month, day] = dateInput.value.split("-").map(Number);
-
-        const data = await loadAssignmentsForDate(year, month, day);
-
-        displayAssignments(data);     // shows list
-        fillAssignmentFields(data);   // fills the boxes
-    });
-});
-</script>
 
 <h1>WEDNESDAY EVENING</h1>
 <div id="service-note" class="service-note"></div>
