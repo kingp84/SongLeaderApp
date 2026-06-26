@@ -365,13 +365,17 @@ function fillAssignmentFields(data) {
         }
     }
 
-    safeFill("openingprayer", data.assignments.openingprayer);
-    safeFill("scriptures", data.assignments.scriptures);
-    safeFill("preaching", data.assignments.preaching);
-    safeFill("closingprayer", data.assignments.closingprayer);
-    safeFill("invitation", data.assignments.invitation);
-    safeFill("classteacher", data.assignments.classteacher);
+    // ⭐ FILL THE BOXES
+    if (data.assignments) {
+        safeFill("openingprayer", data.assignments.openingprayer);
+        safeFill("scriptures", data.assignments.scriptures);
+        safeFill("preaching", data.assignments.preaching);
+        safeFill("closingprayer", data.assignments.closingprayer);
+        safeFill("invitation", data.assignments.invitation);
+        safeFill("classteacher", data.assignments.classteacher);
+    }
 
+    // ⭐ FILL THE NOTE (ONLY ONCE)
     const noteBox = document.getElementById("service-note");
 
     if (data.notes && data.notes.length > 0) {
