@@ -352,16 +352,16 @@ function fillAssignmentFields(data) {
         if (el) {
             el.value = value || "";
         }
-    }    
-        
-    safeFill("openingprayer", a.assignments.openingprayer);
-    safeFill("scriptures", a.assignments.scriptures);
-    safeFill("preaching", a.assignments.preaching);
-    safeFill("closingprayer", a.assignments.closingprayer);
-    safeFill("invitation", a.assignments.invitation);
-    safeFill("classteacher", a.assignments.classteacher);
+    }
 
+    safeFill("openingprayer", data.assignments.openingprayer);
+    safeFill("scriptures", data.assignments.scriptures);
+    safeFill("preaching", data.assignments.preaching);
+    safeFill("closingprayer", data.assignments.closingprayer);
+    safeFill("invitation", data.assignments.invitation);
+    safeFill("classteacher", data.assignments.classteacher);
 }
+
 </script>
 
 </div>
