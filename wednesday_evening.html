@@ -318,27 +318,24 @@ for (let i = 1; i <= 7; i++) {
 function fillAssignmentFields(data) {
     function safeFill(id, value) {
         const el = document.getElementById(id);
-        if (el) el.value = value || "";
+        if (el) {
+            el.value = value || "";
+        }
     }
-            
-    // Normal roles
-    safeFill("openingprayer", a.assignments.openingprayer);
-    safeFill("scriptures", a.assignments.scriptures);
-    safeFill("preaching", a.assignments.preaching);
-    safeFill("closingprayer", a.assignments.closingprayer);
-    safeFill("invitation", a.assignments.invitation);
-    safeFill("classteacher", a.assignments.classteacher);
 
-            
-    // ⭐ Handle Singing Night
+    safeFill("openingprayer", data.assignments.openingprayer);
+    safeFill("scriptures", data.assignments.scriptures);
+    safeFill("preaching", data.assignments.preaching);
+    safeFill("closingprayer", data.assignments.closingprayer);
+    safeFill("invitation", data.assignments.invitation);
+    safeFill("classteacher", data.assignments.classteacher);
+
     const noteBox = document.getElementById("service-note");
-            
-    if (a.notes && a.notes.length > 0) {
-        noteBox.textContent = a.notes.join(" | ");
-        safeFill("classteacher", "N/A");
+
+    if (data.notes && data.notes.length > 0) {
+        noteBox.textContent = data.notes.join(" | ");
     } else {
         noteBox.textContent = "";
-        safeFill("classteacher", a.classteacher);
     }
 }
 </script>
