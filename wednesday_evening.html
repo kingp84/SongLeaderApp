@@ -306,7 +306,24 @@ function fillAssignmentFields(data) {
             el.value = value || "";
         }
     }
+    const noteBox = document.getElementById("service-note");
 
+    // ⭐ Show the note (always)
+    if (a.notes && a.notes.length > 0) {
+        noteBox.textContent = a.notes.join(" | ");
+    } else {
+        noteBox.textContent = "";
+    }
+        // ⭐ SPECIAL LOGIC FOR 2ND WEDNESDAY (SINGING NIGHT)
+    const isSingingNight =
+        a.notes &&
+        a.notes.some(n => n.toLowerCase().includes("singing night"));
+
+    if (isSingingNight) {
+        safeFill("classteacher", "N/A");
+        return; // stop here — do NOT fill normal assignments
+    }
+    
     // ⭐ FILL THE BOXES
     if (data.assignments) {
         safeFill("openingprayer", data.assignments.openingprayer);
@@ -315,17 +332,6 @@ function fillAssignmentFields(data) {
         safeFill("closingprayer", data.assignments.closingprayer);
         safeFill("invitation", data.assignments.invitation);
         safeFill("classteacher", data.assignments.classteacher);
-    }
-
-    // ⭐ FILL THE NOTE (ONLY ONCE)
-    const noteBox = document.getElementById("service-note");
-
-    if (a.notes && a.notes.length > 0) {
-        noteBox.textContent = a.notes.join(" | ");
-        safeFill("classteacher", "N/A");
-    } else {
-        noteBox.textContent = "";
-        safeFill("classteacher", a.assignments.classteacher);
     }
 }
 </script>
